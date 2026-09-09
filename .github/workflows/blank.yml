@@ -1,0 +1,6 @@
+- name: Checkout repository
+  uses: actions/checkout@v4
+
+- name: Extract ZIP
+  run: |
+    unzip -o vpn-config.zip -d vpn-config
