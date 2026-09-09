@@ -1,4 +1,4 @@
-name: Extract ADJDEV-VPN
+name: Extract ZIP to Root
 
 on:
   workflow_dispatch:
@@ -14,16 +14,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Extract ZIP
+      - name: Extract ZIP to root
         run: |
-          mkdir -p ADJDEV-VPN
-          unzip -o ADJDEV-VPN.zip -d ADJDEV-VPN
+          unzip -o ADJDEV-VPN.zip -d extracted
 
-      - name: Commit extracted files
+          cp -r extracted/* .
+          cp -r extracted/.[!.]* . 2>/dev/null || true
+
+          rm -rf extracted
+
+      - name: Remove ZIP
+        run: rm -f ADJDEV-VPN.zip
+
+      - name: Commit changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add ADJDEV-VPN
-          git commit -m "Extract ADJDEV-VPN.zip" || echo "No changes to commit"
+          git add -A
+          git commit -m "Extract ADJDEV-VPN to root" || echo "No changes"
           git push
