@@ -17,7 +17,15 @@ jobs:
       - name: Move project to root
         run: |
           shopt -s dotglob
-          cp -r ADJDEV-VPN/* .
+
+          for item in ADJDEV-VPN/*; do
+            name=$(basename "$item")
+
+            if [ "$name" != ".github" ]; then
+              cp -r "$item" .
+            fi
+          done
+
           rm -rf ADJDEV-VPN
           rm -f ADJDEV-VPN.zip
 
