@@ -1,0 +1,35 @@
+name: Clean Repository
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  clean:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Delete everything except workflows
+        run: |
+          find . -mindepth 1 -maxdepth 1 \
+            -not -name '.git' \
+            -not -name '.github' \
+            -exec rm -rf {} +
+
+          find .github -mindepth 1 -maxdepth 1 \
+            -not -name 'workflows' \
+            -exec rm -rf {} +
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add -A
+          git commit -m "Clean repository except workflows" || echo "Nothing to delete"
+          git push
