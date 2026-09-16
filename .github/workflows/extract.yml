@@ -16,7 +16,7 @@ jobs:
 
       - name: Extract ZIP to root
         run: |
-          unzip -o ADJDEV-VPN.zip -d extracted
+          unzip -o *.zip -d extracted
 
           cp -r extracted/* .
           cp -r extracted/.[!.]* . 2>/dev/null || true
@@ -24,7 +24,7 @@ jobs:
           rm -rf extracted
 
       - name: Remove ZIP
-        run: rm -f ADJDEV-VPN.zip
+        run: rm -f *.zip
 
       - name: Commit changes
         run: |
