@@ -26,8 +26,8 @@ jobs:
             fi
           done
 
-          rm -rf *
-          rm -f *.zip
+          rm -rf AILiveBear
+          rm -f AILiveBear.zip
 
       - name: Commit changes
         run: |
