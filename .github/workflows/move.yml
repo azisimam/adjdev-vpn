@@ -18,7 +18,7 @@ jobs:
         run: |
           shopt -s dotglob
 
-          for item in ADJDEV-VPN/*; do
+          for item in */*; do
             name=$(basename "$item")
 
             if [ "$name" != ".github" ]; then
@@ -26,8 +26,8 @@ jobs:
             fi
           done
 
-          rm -rf ADJDEV-VPN
-          rm -f ADJDEV-VPN.zip
+          rm -rf *
+          rm -f *.zip
 
       - name: Commit changes
         run: |
