@@ -18,7 +18,7 @@ jobs:
         run: |
           shopt -s dotglob
 
-          for item in */*; do
+          for item in AILiveBear/*; do
             name=$(basename "$item")
 
             if [ "$name" != ".github" ]; then
